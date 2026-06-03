@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鈴木 隆之 | AI活用 × キャッシュフローコーチ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:       #1A2744;
+      --gold:          #C8A96E;
+      --gold-light:    #e8cfa0;
+      --bg:            #FFFFFF;
+      --surface:       #F7F7F5;
+      --text:          #1A1A1A;
+      --text-sub:      #666666;
+      --border:        #E0E0E0;
+      --max-w:         1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── UTILITY ── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    .gold-line {
+      display: block;
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 0 1.2rem 0;
+    }
+    .gold-line--center { margin: 0 auto 1.2rem; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(26, 39, 68, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,169,110,0.25);
+      height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--bg);
+      letter-spacing: 0.14em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 80px 0; }
+
+    .sec-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-family: 'Noto Sans JP', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .sec-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3rem;
+      line-height: 1.4;
+    }
+    .sec-title--white { color: #fff; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--primary);
+      display: flex; align-items: center;
+      padding: 80px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 79px,
+          rgba(200,169,110,0.06) 79px,
+          rgba(200,169,110,0.06) 80px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 79px,
+          rgba(200,169,110,0.06) 79px,
+          rgba(200,169,110,0.06) 80px
+        );
+    }
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+    .hero-text { color: #fff; }
+    .hero-en {
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-en::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-text h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 44px;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.8rem;
+      white-space: nowrap;
+    }
+    .hero-text h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 2;
+      margin-bottom: 2.8rem;
+      max-width: 400px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 42px;
+      font-size: 0.88rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--gold);
+    }
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--primary);
+      border-color: var(--gold);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .hero-img img {
+      width: 100%;
+      max-width: 660px;
+      display: block;
+      border-radius: 4px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-img img {
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+      box-shadow: 0 8px 32px rgba(26,39,68,0.1);
+    }
+    .about-body .name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.08em;
+    }
+    .about-body .role {
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+    .about-body p {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-table {
+      margin-top: 2rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.6rem 2rem;
+      font-size: 0.88rem;
+    }
+    .about-table dt { color: var(--text-sub); white-space: nowrap; }
+    .about-table dd { color: var(--text); }
+
+    /* ── WORKS ── */
+    #works { background: var(--surface); }
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .work-card {
+      background: var(--bg);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(26,39,68,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(26,39,68,0.13);
+    }
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .work-body {
+      padding: 1.4rem 1.6rem 1.8rem;
+      border-top: 2px solid var(--gold);
+    }
+    .work-cat {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .work-body h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .work-body p {
+      font-size: 0.83rem;
+      color: var(--text-sub);
+      line-height: 1.8;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .skill-card {
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--primary);
+      padding: 1.8rem 1.6rem;
+      border-radius: 4px;
+      transition: box-shadow 0.2s;
+    }
+    .skill-card:hover {
+      box-shadow: 0 6px 24px rgba(26,39,68,0.08);
+    }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .skill-card h4 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+    .skill-card p { font-size: 0.83rem; color: var(--text-sub); }
+
+    /* ── SERVICE ── */
+    #service { background: var(--surface); }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--bg);
+      padding: 2rem 2rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 6px 24px rgba(26,39,68,0.08); }
+    .service-num {
+      font-size: 2.4rem;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 600;
+      color: rgba(26,39,68,0.08);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+    .service-card h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+    }
+    .service-card p { font-size: 0.88rem; color: var(--text-sub); line-height: 1.85; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--primary);
+      text-align: center;
+      padding: 100px 0;
+    }
+    #contact .sec-label { color: var(--gold); }
+    #contact .sec-title { color: #fff; text-align: center; }
+    .contact-body {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-lead {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+      line-height: 2;
+    }
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+    .contact-item { text-align: center; }
+    .contact-item span {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .contact-item p { color: rgba(255,255,255,0.85); font-size: 0.92rem; }
+
+    /* ── DIVIDER ── */
+    .gold-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0e1829;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+      padding: 1.8rem 40px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-img { order: -1; display: flex; justify-content: center; }
+      .hero-img img { max-width: 300px; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-en { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img { max-width: 240px; }
+      .works-grid, .skills-grid { grid-template-columns: 1fr; }
+      .service-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">SUZUKI <span>TAKAYUKI</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#service">Service</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-en">Cash Flow Coach × AI Consulting</p>
+      <h1>AI で、<br>経営を<em>加速</em>する。</h1>
+      <p class="hero-sub">
+        キャッシュフローコーチとしての現場知見に、<br>
+        最新のAI技術を掛け合わせ、<br>
+        中小企業の経営課題を解決します。
+      </p>
+      <a href="#works" class="btn btn-outline">実績を見る</a>
+    </div>
+    <div class="hero-img">
+      <img src="image/avatar.png" alt="鈴木 隆之">
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="sec-label">About</p>
+    <span class="gold-line"></span>
+    <h2 class="sec-title">プロフィール</h2>
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="image/avatar.png" alt="鈴木 隆之">
+      </div>
+      <div class="about-body">
+        <p class="name">鈴木 隆之</p>
+        <p class="role">キャッシュフローコーチ ／ 合同会社 鈴木企画</p>
+        <p>
+          中小企業の財務・資金繰り改善を専門とするキャッシュフローコーチ。
+          経営者に寄り添いながら、数字と行動計画を結びつける実践的な支援を行っています。
+        </p>
+        <p>
+          近年はAI（Claude / ChatGPT 等）を積極的に業務へ導入し、
+          提案書作成・データ分析・業務自動化など幅広い場面で活用。
+          「AIを使える経営者・支援者」を目指すクライアントへの研修・伴走支援も行っています。
+        </p>
+        <dl class="about-table">
+          <dt>会社</dt><dd>合同会社 鈴木企画</dd>
+          <dt>所在地</dt><dd>東京都練馬区上石神井</dd>
+          <dt>専門</dt><dd>キャッシュフロー改善 ／ AI活用支援</dd>
+          <dt>Email</dt><dd>suzuki@ta-office.com</dd>
+          <dt>TEL</dt><dd>080-4330-0292</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="container">
+    <p class="sec-label">Works</p>
+    <span class="gold-line"></span>
+    <h2 class="sec-title">AI 活用実績</h2>
+    <div class="works-grid">
+
+      <div class="work-card">
+        <img class="work-thumb" src="image/work1.png" alt="名刺デザイン AI生成">
+        <div class="work-body">
+          <p class="work-cat">Graphic / AI Design</p>
+          <h3>AI を活用した名刺デザイン作成</h3>
+          <p>生成AIを使い、ブランドイメージに沿った名刺デザインを短時間で制作。デザイナー不要でプロ品質の成果物を実現しました。</p>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <img class="work-thumb" src="image/work2.png" alt="Claude Code ポートフォリオ構築">
+        <div class="work-body">
+          <p class="work-cat">Claude Code / Dev</p>
+          <h3>Claude Code によるポートフォリオサイト設計</h3>
+          <p>Claude Code を使ってポートフォリオサイトの構造設計・提案を実施。AIとの対話だけでサイト要件を整理し、実装まで完結させました。</p>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <img class="work-thumb" src="image/work3.png" alt="Claude Code ファイル管理自動化">
+        <div class="work-body">
+          <p class="work-cat">Automation / Claude Code</p>
+          <h3>ファイル管理・コピー作業の自動化</h3>
+          <p>Claude Code を使い、複数ファイルの整理・コピー先管理を自動化。手作業ゼロで正確なファイル運用フローを構築しました。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="sec-label">Skills</p>
+    <span class="gold-line"></span>
+    <h2 class="sec-title">活用スキル・ツール</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h4>Claude / Claude Code</h4>
+        <p>Anthropic 製 AI を業務・開発に活用。プロンプト設計からコード生成まで対応。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💬</div>
+        <h4>ChatGPT / GPT-4o</h4>
+        <p>文章作成・分析・提案書生成など幅広いビジネス業務に活用。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>キャッシュフロー分析</h4>
+        <p>財務数値の可視化・資金繰り改善計画の策定・経営者向け説明。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <h4>業務自動化</h4>
+        <p>AI × ツール連携で反復作業を削減。生産性向上のフロー設計。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <h4>AI デザイン生成</h4>
+        <p>名刺・資料・Webビジュアルを生成AIで高速・高品質に制作。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🏢</div>
+        <h4>中小企業支援</h4>
+        <p>経営者向けコーチング・伴走支援・AI活用研修の実施。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="container">
+    <p class="sec-label">Service</p>
+    <span class="gold-line"></span>
+    <h2 class="sec-title">提供サービス</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>キャッシュフロー改善コーチング</h3>
+        <p>資金繰り表の作成から改善計画の立案・実行支援まで、経営者に伴走します。数字を経営の武器に変えるサポートを提供。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>AI 活用コンサルティング</h3>
+        <p>Claude・ChatGPT 等の業務導入設計、プロンプト設計、社内研修を提供します。現場に根ざした実践的なAI活用を支援。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>業務自動化・ツール構築</h3>
+        <p>AI を活用した業務フロー設計・自動化ツールの導入で生産性を向上します。属人化の排除と業務効率化を実現。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>資料・コンテンツ制作支援</h3>
+        <p>提案書・名刺・Web コンテンツを AI を駆使して高速・高品質に制作します。ブランド価値を高めるビジュアル戦略も提供。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-body">
+      <p class="sec-label">Contact</p>
+      <span class="gold-line gold-line--center"></span>
+      <h2 class="sec-title sec-title--white">お問い合わせ</h2>
+      <p class="contact-lead">
+        サービスのご依頼・ご相談はお気軽にどうぞ。<br>
+        初回のご相談は無料で承っております。
+      </p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span>Tel</span>
+          <p>080-4330-0292</p>
+        </div>
+        <div class="contact-item">
+          <span>Email</span>
+          <p>suzuki@ta-office.com</p>
+        </div>
+        <div class="contact-item">
+          <span>Company</span>
+          <p>合同会社 鈴木企画</p>
+        </div>
+      </div>
+      <a href="mailto:suzuki@ta-office.com" class="btn btn-primary">メールで問い合わせる</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Suzuki Takayuki ／ 合同会社 鈴木企画 &nbsp;|&nbsp; All Rights Reserved.
+</footer>
+
+</body>
+</html>
