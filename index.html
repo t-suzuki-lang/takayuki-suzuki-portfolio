@@ -31,7 +31,7 @@
 
   <!-- CSP -->
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; script-src 'self'">
+        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'self'">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -39,14 +39,23 @@
 
   <!-- ===== HEADER / NAV ===== -->
   <header class="site-header">
-    <nav class="nav">
+    <nav class="nav" aria-label="メインナビゲーション">
       <div class="nav__inner">
-        <a href="#" class="nav__logo">Takayuki Suzuki</a>
-        <ul class="nav__links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#works">Works</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <a href="/" class="nav__logo" aria-label="ページトップへ戻る" lang="en">Takayuki Suzuki</a>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#about" lang="en">About</a></li>
+          <li><a href="#works" lang="en">Works</a></li>
+          <li><a href="#contact" lang="en">Contact</a></li>
         </ul>
+        <!-- ハンバーガーメニュー（モバイル用） -->
+        <button class="nav__toggle" id="nav-toggle"
+                aria-label="メニューを開く"
+                aria-expanded="false"
+                aria-controls="nav-links">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
       </div>
     </nav>
 
@@ -55,15 +64,16 @@
       <div class="hero__inner">
         <div class="hero__avatar-wrap">
           <img src="images/avatar.png" alt="鈴木隆之のイラスト画像" class="hero__avatar"
-               width="200" height="133" fetchpriority="high">
+               width="200" height="133" fetchpriority="high"
+               onerror="this.style.visibility='hidden'">
         </div>
         <div class="hero__text">
           <p class="hero__label">キャッシュフローコーチ × AI活用</p>
           <h1 class="hero__name">鈴木 隆之</h1>
-          <p class="hero__name-en">Suzuki Takayuki</p>
+          <p class="hero__name-en" lang="en">Suzuki Takayuki</p>
           <p class="hero__desc">合同会社 鈴木企画 代表<br>Claude Codeを活用した業務自動化・AI開発に取り組んでいます。</p>
           <div class="hero__tags">
-            <span class="hero__tag">Claude Code</span>
+            <span class="hero__tag" lang="en">Claude Code</span>
             <span class="hero__tag">業務自動化</span>
             <span class="hero__tag">キャッシュフロー経営</span>
           </div>
@@ -78,11 +88,12 @@
     <!-- ===== ABOUT ===== -->
     <section class="about" id="about">
       <div class="about__inner">
-        <h2 class="section-heading">About</h2>
+        <h2 class="section-heading" lang="en">About</h2>
         <div class="about__content">
           <div class="about__photo-wrap">
             <img src="images/avatar.png" alt="鈴木隆之のイラスト画像" class="about__photo"
-                 width="280" height="187">
+                 width="280" height="187"
+                 onerror="this.style.visibility='hidden'">
           </div>
           <div class="about__body">
             <h3 class="about__name">鈴木 隆之</h3>
@@ -117,7 +128,7 @@
     <!-- ===== WORKS ===== -->
     <section class="works" id="works">
       <div class="works__inner">
-        <h2 class="section-heading">Works</h2>
+        <h2 class="section-heading" lang="en">Works</h2>
         <p class="works__lead">Claude Codeを活用して制作・自動化したプロジェクトをご紹介します。</p>
         <div class="works__grid">
 
@@ -126,16 +137,17 @@
             <div class="card__image-wrap">
               <img
                 src="images/work2.png"
-                alt="Claude Codeを使ったポートフォリオサイト制作のスクリーンショット"
+                alt="Claude Codeとの対話でポートフォリオサイトを設計・実装した作業画面"
                 class="card__image"
                 loading="lazy"
+                onerror="this.style.visibility='hidden'"
               >
             </div>
             <div class="card__body">
               <div class="card__tags">
-                <span class="tag">Claude Code</span>
-                <span class="tag">HTML/CSS/JS</span>
-                <span class="tag">GitHub Pages</span>
+                <span class="tag" lang="en">Claude Code</span>
+                <span class="tag" lang="en">HTML/CSS/JS</span>
+                <span class="tag" lang="en">GitHub Pages</span>
               </div>
               <h3 class="card__title">AIポートフォリオサイト制作</h3>
               <p class="card__desc">Claude Codeとの対話のみでポートフォリオサイトを設計・実装。参考サイト調査から設計書作成、コーディング、デプロイまでをAIが一貫してサポート。</p>
@@ -147,14 +159,15 @@
             <div class="card__image-wrap">
               <img
                 src="images/work3.png"
-                alt="Claude Codeを使ったファイル管理自動化のスクリーンショット"
+                alt="Claude Codeを使ったファイル管理自動化の作業画面"
                 class="card__image"
                 loading="lazy"
+                onerror="this.style.visibility='hidden'"
               >
             </div>
             <div class="card__body">
               <div class="card__tags">
-                <span class="tag">Claude Code</span>
+                <span class="tag" lang="en">Claude Code</span>
                 <span class="tag">業務自動化</span>
                 <span class="tag">ファイル管理</span>
               </div>
@@ -168,9 +181,10 @@
             <div class="card__image-wrap">
               <img
                 src="images/work1.png"
-                alt="合同会社鈴木企画の名刺デザイン"
+                alt="合同会社鈴木企画のブランドイメージを体現した名刺デザイン"
                 class="card__image"
                 loading="lazy"
+                onerror="this.style.visibility='hidden'"
               >
             </div>
             <div class="card__body">
@@ -193,7 +207,7 @@
   <footer class="site-footer" id="contact">
     <div class="site-footer__inner">
       <div class="site-footer__contact">
-        <h2 class="site-footer__heading">Contact</h2>
+        <h2 class="site-footer__heading" lang="en">Contact</h2>
         <p class="site-footer__text">お仕事のご依頼・AI活用のご相談はお気軽にどうぞ。</p>
         <a href="mailto:suzuki@ta-office.com" class="site-footer__btn">
           メールで問い合わせる →
@@ -206,7 +220,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="site-footer__github"
-          aria-label="GitHub"
+          aria-label="GitHubプロフィールを開く（新しいタブ）"
         >
           <svg class="site-footer__github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577
@@ -221,7 +235,7 @@
               0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57
               C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
           </svg>
-          GitHub
+          <span lang="en">GitHub</span>
         </a>
       </div>
     </div>
