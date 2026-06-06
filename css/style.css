@@ -14,8 +14,6 @@ ul, ol { list-style: none; }
   --color-sub-bg:     #F5F5F7;
   --color-accent:     #7C3AED;
   --color-sub-accent: #06B6D4;
-  --color-highlight:  #FF6B6B;
-  --color-amber:      #F59E0B;
   --color-text:       #1E1B4B;
   --color-muted:      #6B7280;
   --gradient:         linear-gradient(135deg, #7C3AED, #06B6D4);
@@ -346,6 +344,15 @@ body {
   transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
 }
 .card.is-visible { opacity: 1; transform: translateY(0); }
+
+/* モーション軽減設定のユーザー向け：アニメーションを無効化してカードを即表示 */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 .card:nth-child(2) { transition-delay: 0.1s; }
 .card:nth-child(3) { transition-delay: 0.2s; }
 .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
@@ -492,8 +499,6 @@ body {
     font-size: 1rem;
   }
   .nav__toggle { display: flex; }
-  .nav { position: absolute; }
-
   .hero { padding: 100px 16px 64px; }
   .hero__inner { flex-direction: column; align-items: center; text-align: center; gap: 28px; }
   .hero__tags { justify-content: center; }
